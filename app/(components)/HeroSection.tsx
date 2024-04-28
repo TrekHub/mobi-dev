@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 const HeroSection = () => {
@@ -8,12 +9,14 @@ const HeroSection = () => {
         <h1 className="mb-4 text-3xl font-semibold text-center text-black dark:text-white">
           Explore Categories
         </h1>
-        <button
-          type="button"
-          className="focus:outline-none  text-white bg-green-accent hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-3xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-        >
-          Create an Event
-        </button>
+        <Link href="/Events/">
+          <button
+            type="button"
+            className="focus:outline-none  text-white bg-green-accent hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-3xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          >
+            Create an Event
+          </button>
+        </Link>
       </div>
 
       {/* // dropdown */}
