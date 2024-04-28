@@ -6,7 +6,7 @@ const Banner = () => {
       className="bg-cover flex flex-col items-center justify-center h-[300px]"
       style={{
         backgroundImage:
-          "url('https://www.redhotirons.com/sites/redhotirons.com/files/Untitled%20design%20%2823%29.png')",
+          "url('https://images.pexels.com/photos/573130/pexels-photo-573130.jpeg?cs=srgb&dl=pexels-zyuliansyah-573130.jpg&fm=jpg')",
       }}
     >
       <div className="w-4/5 ">
