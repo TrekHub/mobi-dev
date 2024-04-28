@@ -1,7 +1,17 @@
 import Image from "next/image";
+import HeroSection from "./(components)/HeroSection";
+import Banner from "./(components)/Banner";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <div>
+      <div>
+        <Banner />
+      </div>
+          
+     <div className="bg-cover mt-9  w-3/4 mx-auto">
+            <HeroSection />
+          </div>
+    </div>
   );
 }

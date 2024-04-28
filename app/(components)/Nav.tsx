@@ -9,7 +9,7 @@ const NavBar = () => {
           CANEX
         </a>
 
-        <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+        <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-5">
        
           <li>
             <button

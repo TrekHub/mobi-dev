@@ -3,7 +3,7 @@ import React from "react";
 const Banner = () => {
   return (
     <div
-      className="bg-cover flex flex-col items-center justify-center h-[700px]"
+      className="bg-cover flex flex-col items-center justify-center h-[300px]"
       style={{
         backgroundImage:
           "url('https://www.redhotirons.com/sites/redhotirons.com/files/Untitled%20design%20%2823%29.png')",
