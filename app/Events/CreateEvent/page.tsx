@@ -1,9 +1,10 @@
 import React from "react";
-import Banner from "../(components)/Banner";
+import Banner from "../../(components)/Banner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faEnvelope, faFlag, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
-const AddEventPage = () => {
+const CreateEvent = () => {
     return (
         <div className="flex flex-col">
             <Banner />
@@ -356,12 +357,16 @@ const AddEventPage = () => {
                         />
                     </div>
                     <div className="flex flex-row justify-end mb-10 space-x-3">
-                        <button
-                            type="submit"
-                            className="text-white bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Preview
-                        </button>
+
+                        <Link href="/Events/PreviewEvent">
+                            <button
+                                type="button"
+                                className="text-white bg-gray-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                                Preview
+                            </button>
+                        </Link>
+
                         <button
                             type="submit"
                             className="text-white bg-green-accent hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -379,4 +384,4 @@ const AddEventPage = () => {
     );
 };
 
-export default AddEventPage;
+export default CreateEvent;
