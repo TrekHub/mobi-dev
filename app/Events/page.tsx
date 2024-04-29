@@ -1,12 +1,10 @@
 import EventForm from "@/app/(components)/EventForm";
 import React from "react";
-import PreviewEvent from "./[id]/page";
-;
+
 
 
 const getEventById = async (id: any) => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
-    console.log("baseUrl", baseUrl);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;  
 
     try {
         const res = await fetch(`${baseUrl}/api/Events/${id}`, {

@@ -20,14 +20,17 @@ const getEvents = async () => {
     console.log("Events:", data);
     return data;
   } catch (err) {
-    console.error("Error fetching events:", err);
+
     return { error: "An error occurred while fetching events" };
   }
 }
 
 const Home = async () => {
+  if (!process.env.NEXT_PUBLIC_BASE_API_URL) {
+    return null;
+  }
   const events = await getEvents();
-  console.log(events);
+  // console.log(events);
 
   return (
     <div>
