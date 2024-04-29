@@ -1,3 +1,6 @@
+"use client";
+
+
 import React, { useState } from 'react'
 import Banner from './Banner';
 import { useRouter } from 'next/navigation';

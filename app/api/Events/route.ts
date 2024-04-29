@@ -2,7 +2,6 @@ import Event from "../../(models)/Event";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  console.log("hellp");
   try {
     const body = await req.json();
     const eventData = body.formData;
