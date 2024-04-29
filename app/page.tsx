@@ -26,7 +26,7 @@ const getEvents = async () => {
 }
 
 const Home = async () => {
-  if (!process.env.NEXT_PUBLIC_BASE_API_URL) {
+  if (process.env.NEXT_PUBLIC_BASE_API_URL === undefined) {
     return null;
   }
   const events = await getEvents();
