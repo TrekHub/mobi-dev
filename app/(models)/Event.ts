@@ -6,10 +6,11 @@ const mongooseOptions: ConnectOptions = {
   // useNewUrlParser: true,
 };
 
+
 // Connect to MongoDB
 mongoose
   .connect(
-    process.env.MONGODB_URI || "",
+    process.env.MONGODB_URI || " mongodb://localhost:27017/EventDB",
     mongooseOptions // Pass connection options directly
   )
   .then(() => {
