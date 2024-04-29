@@ -4,7 +4,7 @@ import React from "react";
 
 
 const getEventById = async (id: any) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;  
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     if (!baseUrl) {
         return;
     }
@@ -25,23 +25,26 @@ const getEventById = async (id: any) => {
 }
 
 const CreateEvent = async ({ params }: any) => {
-
     const EDITMODE = params.id === "new" ? false : true;
-    let updatedEventData = {};
+    let updatedEventData;
 
-    if (EDITMODE) {
-        const fetchedEvent = await getEventById(params.id);
-        updatedEventData = fetchedEvent.event;
-        console.log("uhello", updatedEventData);
-    } else {
-        updatedEventData = {
-            _id: "new"
+    try {
+        if (EDITMODE) {
+            const fetchedEvent = await getEventById(params.id);
+            updatedEventData = fetchedEvent.event;
+            console.log("uhello", updatedEventData);
+        } else {
+            updatedEventData = {
+                _id: "new"
+            };
         }
+    } catch (err) {
+        console.error("Error fetching or processing event data:", err);
+        updatedEventData = {}; // Handle the case where event data couldn't be fetched
     }
-
-
 
     return <EventForm event={updatedEventData} />;
 };
+
 
 export default CreateEvent;
