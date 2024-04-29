@@ -4,11 +4,11 @@ import Banner from "./(components)/Banner";
 import EventCard from "./(components)/EventCard";
 //fetching events
 const getEvents = async () => {
-  
+
 
   try {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;  
-  console.log("baseUrl", baseUrl);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+    console.log("baseUrl", baseUrl);
     const res = await fetch(`${baseUrl}/api/Events`, {
       cache: "no-cache",
     });
