@@ -9,7 +9,7 @@ const getEvents = async () => {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
     console.log("baseUrl", baseUrl);
-    const res = await fetch("${baseUrl}/api/Events", {
+    const res = await fetch(`${baseUrl}/api/Events`, {
       cache: "no-cache",
     });
     const data = await res.json();
