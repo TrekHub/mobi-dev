@@ -6,29 +6,32 @@ import Banner from "./(components)/Banner";
 import EventCard from "./(components)/EventCard";
 //fetching events
 const getEvents = async () => {
-
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
   console.log("baseUrl", baseUrl);
-  // if (!baseUrl) {
-  //   return;
-  // }
 
-  
+  if (!baseUrl) {
+    console.error("Base URL is not configured.");
+    return { error: "Base URL is not configured." };
+  }
+
   try {
-
     const res = await fetch(`${baseUrl}/api/Events`, {
       cache: "no-cache",
-
     });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch events.");
+    }
 
     const data = await res.json();
     console.log("Events:", data);
     return data;
   } catch (err) {
-
-    return { error: "An error occurred while fetching events" };
+    console.error("An error occurred while fetching events:", err);
+    return { error: "An error occurred while fetching events." };
   }
 }
+
 
 const Home = async () => {
   // if (process.env.NEXT_PUBLIC_BASE_API_URL == undefined) {
