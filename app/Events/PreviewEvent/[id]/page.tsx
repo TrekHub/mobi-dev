@@ -13,6 +13,10 @@ import React from 'react'
 const getEventById = async (id: any) => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
+  if (!baseUrl) {
+    return;
+  }
   try {
     const res = await fetch(`${baseUrl}/api/Events/${id}`, {
       cache: "no-cache",

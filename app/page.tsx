@@ -9,6 +9,9 @@ const getEvents = async () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
   console.log("baseUrl", baseUrl);
+  if (!baseUrl) {
+    return;
+  }
   try {
 
     const res = await fetch(`${baseUrl}/api/Events`, {
@@ -26,7 +29,7 @@ const getEvents = async () => {
 }
 
 const Home = async () => {
-  if (process.env.NEXT_PUBLIC_BASE_API_URL === undefined) {
+  if (process.env.NEXT_PUBLIC_BASE_API_URL == undefined) {
     return null;
   }
   const events = await getEvents();
