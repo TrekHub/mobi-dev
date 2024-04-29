@@ -9,7 +9,7 @@ const mongooseOptions: ConnectOptions = {
 // Connect to MongoDB
 mongoose
   .connect(
-    process.env.MONGODB_URI || "mongodb://localhost:27017/EventDB",
+    process.env.MONGODB_URI || "",
     mongooseOptions // Pass connection options directly
   )
   .then(() => {

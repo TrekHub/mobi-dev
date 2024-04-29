@@ -6,7 +6,7 @@ import PreviewEvent from "./[id]/page";
 
 const getEventById = async (id: any) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/Events/${id}`, {
+        const res = await fetch(`${process.env.BASE_URL}/api/Events/${id}`, {
             cache: "no-cache",
         });
         if (!res.ok) {
