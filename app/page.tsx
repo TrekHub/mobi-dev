@@ -7,15 +7,15 @@ import EventCard from "./(components)/EventCard";
 //fetching events
 const getEvents = async () => {
 
-
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+  console.log("baseUrl", baseUrl);
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
-    console.log("baseUrl", baseUrl);
+
     const res = await fetch(`${baseUrl}/api/Events`, {
       cache: "no-cache",
 
     });
-  
+
     const data = await res.json();
     console.log("Events:", data);
     return data;
