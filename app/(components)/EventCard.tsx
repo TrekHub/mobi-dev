@@ -9,7 +9,7 @@ const EventCard = ({ event }: any) => {
   return (
 
 
-    <Link href={`/Events/${event._id}`}>
+    <Link href={`/Events/PreviewEvent/${event._id}`}>
       <div className=" bg-white rounded-sm  dark:bg-gray-800 m-5">
 
         <img
@@ -34,14 +34,14 @@ const EventCard = ({ event }: any) => {
 
           <div className="px-3 flex flex-col justify-start">
 
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">
               {event.event_name}
             </h5>
 
-            <p className="mb-1 font-medium text-gray-700 dark:text-gray-400">
+            <p className="mb-1 font-medium  md:text-sm text-gray-700 dark:text-gray-400">
               {event.location}
             </p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            <p className="mb-3 font-normal  md:text-sm text-gray-700 dark:text-gray-400">
               {event.start_date} - {event.end_date}
             </p>
 
@@ -50,9 +50,9 @@ const EventCard = ({ event }: any) => {
                 <FontAwesomeIcon icon={faTicket} className="w-5 h-5 mr-1" />
                 {event.ticket_price}
               </span>
-              <span className="flex flex-row ml-3">
-                <FontAwesomeIcon icon={faStar} className="w-5 h-5 mr-1 text-purple-accent" />
-                14 Interested
+              <span className="flex flex-row ml-3  md:text-sm">
+                <FontAwesomeIcon icon={faStar} className="w-5 h-5 mr-1   text-purple-accent" />
+                14 
               </span>
 
             </div>
