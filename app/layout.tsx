@@ -22,11 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <div className="flex flex-col h-screen max-h-screen">
+        <div className="flex overflow-x-hidden flex-col h-screen w-max-screen  max-h-screen">
           <NavBar />
-          
-
-          <div className="flex-grow overflow-y-auto bg-page text-default-text">
+          <div className="bg-page text-default-text">
             {children}
           </div>
         </div>

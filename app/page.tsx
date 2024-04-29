@@ -18,7 +18,7 @@ const getEvents = async () => {
 }
 
 const Home = async () => {
-  const  events  = await getEvents();
+  const events = await getEvents();
   console.log(events);
 
   return (
@@ -26,10 +26,10 @@ const Home = async () => {
       <div>
         <Banner />
       </div>
-      <div className="bg-cover mt-9  w-3/4 md:w-10/12 mx-auto">
+      <div className="bg-cover mt-9 block  w-3/4  md:w-10/12 sm:w-11/12 mx-auto">
         <HeroSection />
       </div>
-      <div className=" md:w-10/12 mx-auto mt-10 grid  md:grid-cols-3 gap-2">
+      <div className=" md:w-10/12 mx-auto mt-10 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
         {events && events.map((event: any) => ( // Check if events exist
           <EventCard key={event._id} event={event} />
         ))}

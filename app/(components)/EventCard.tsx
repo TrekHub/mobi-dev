@@ -53,7 +53,7 @@ const EventCard = ({ event }: any) => {
           <div className="w-1/3">
 
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-purple-accent dark:text-white">
-            {getMonthInWords(event.start_date)}
+              {getMonthInWords(event.start_date)}
             </h5>
 
 
@@ -65,7 +65,7 @@ const EventCard = ({ event }: any) => {
 
           <div className="px-3 flex flex-col justify-start">
 
-            <h5 className="mb-2 text-2xl md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl md:text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {event.event_name}
             </h5>
 

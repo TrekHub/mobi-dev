@@ -5,7 +5,7 @@ import React from "react";
 const Banner = () => {
   return (
     <div
-      className="bg-cover flex flex-col items-center justify-center h-[300px]"
+      className="bg-cover flex flex-col items-center justify-center h-[400px]"
       style={{
         backgroundImage:
           "url('https://images.pexels.com/photos/573130/pexels-photo-573130.jpeg?cs=srgb&dl=pexels-zyuliansyah-573130.jpg&fm=jpg')",
