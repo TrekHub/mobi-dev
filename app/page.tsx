@@ -15,10 +15,7 @@ const getEvents = async () => {
       cache: "no-cache",
 
     });
-    console.log("baseUrl", baseUrl);
-    if (!res.ok) {
-      throw new Error("Failed to fetch events");
-    }
+  
     const data = await res.json();
     console.log("Events:", data);
     return data;
