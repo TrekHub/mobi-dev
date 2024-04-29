@@ -4,8 +4,11 @@ import Banner from "./(components)/Banner";
 import EventCard from "./(components)/EventCard";
 //fetching events
 const getEvents = async () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;  
+
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/Events`, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;  
+    const res = await fetch(`${baseUrl}/api/Events`, {
       cache: "no-cache",
     });
     const data = await res.json();
