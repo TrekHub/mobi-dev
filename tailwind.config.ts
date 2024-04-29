@@ -3,8 +3,6 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./node_modules/flowbite/src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/flowbite-react/lib/**/*.js",
-    "./node_modules/flowbite-react/lib/**/*.ts",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./public/**/*.html",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
