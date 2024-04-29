@@ -5,7 +5,7 @@ import EventCard from "./(components)/EventCard";
 //fetching events
 const getEvents = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Events", {
+    const res = await fetch(`${process.env.BASE_URL}/api/Events`, {
       cache: "no-cache",
     });
     const data = await res.json();
