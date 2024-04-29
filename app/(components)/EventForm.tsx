@@ -1,49 +1,16 @@
 "use client";
 
 
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Banner from './Banner';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faEnvelope, faFlag, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 
-const EventForm = () => {
+const EventForm = ({ event }: any) => {
+    const EDITMODE = event._id === "new" ? false : true;
     const router = useRouter();
-
-    const handleEventChange = (e: any) => {
-        const value = e.target.value;
-        const name = e.target.name;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        })
-        );
-    }
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        try {
-            const res = await fetch("/api/Events", {
-                method: "POST",
-                body: JSON.stringify({ formData }),
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-            if (res.ok) {
-                router.push("/");
-                router.refresh();
-            } else {
-                throw new Error("Something went wrong. Failed to create event.");
-            }
-        console.log("Form data:", formData);
-
-        } catch (error) {
-            console.error("Error occurred during form submission:", error);
-        }
-    };
-
 
 
     const initialState = {
@@ -73,7 +40,73 @@ const EventForm = () => {
         twitter_link: "",
         other_info: "",
     }
+    if (EDITMODE) {
+        initialState["event_name"] = event.event_name;
+        initialState["event_description"] = event.event_description;
+        initialState["location"] = event.location;
+        initialState["country"] = event.country;
+        initialState["city"] = event.city;
+        initialState["start_date"] = event.start_date;
+        initialState["end_date"] = event.end_date;
+        initialState["start_time"] = event.start_time;
+        initialState["end_time"] = event.end_time;
+        initialState["venue_name"] = event.venue_name;
+        initialState["location2"] = event.location2;
+        initialState["meeting_link"] = event.meeting_link;
+        initialState["email"] = event.email;
+        initialState["ticket_price"] = event.ticket_price;
+        initialState["abbreviation"] = event.abbreviation;
+        initialState["first_name"] = event.first_name;
+        initialState["middle_name"] = event.middle_name;
+        initialState["last_name"] = event.last_name;
+        initialState["phone_number"] = event.phone_number;
+        initialState["website"] = event.website;
+        initialState["facebook_link"] = event.facebook_link;
+        initialState["instagram_link"] = event.instagram_link;
+        initialState["twitter_link"] = event.twitter_link;
+        initialState["other_info"] = event.other_info;
+    }
+
+
+
     const [formData, setFormData] = useState(initialState);
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("/api/Events", {
+                method: "POST",
+                body: JSON.stringify({ formData }),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+            if (res.ok) {
+                router.push("/");
+                router.refresh();
+            } else {
+                throw new Error("Something went wrong. Failed to create event.");
+            }
+            console.log("Form data:", formData);
+
+        } catch (error) {
+            console.error("Error occurred during form submission:", error);
+        }
+    };
+
+
+
+
 
     return (
         <div className="flex flex-col">
@@ -91,7 +124,8 @@ const EventForm = () => {
                             type="text"
                             id="event_name"
                             name="event_name"
-                            onChange={handleEventChange}
+
+                            onChange={handleChange}
                             value={formData.event_name}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Raha Fest"
@@ -100,7 +134,7 @@ const EventForm = () => {
                     </div>
                     <div className="mb-6">
                         <label htmlFor="event_description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Description</label>
-                        <textarea id="event_description" name="event_description" onChange={handleEventChange} value={formData.event_description} rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe the Event..."></textarea>
+                        <textarea id="event_description" name="event_description" onChange={handleChange} value={formData.event_description} rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe the Event..."></textarea>
                     </div>
 
                     <div className="mb-6">
@@ -134,7 +168,7 @@ const EventForm = () => {
                                 type="text"
                                 id="location"
                                 name="location"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.location}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="John"
@@ -152,7 +186,7 @@ const EventForm = () => {
                                 type="text"
                                 id="country"
                                 name="country"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.country}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="John"
@@ -170,7 +204,7 @@ const EventForm = () => {
                                 type="text"
                                 id="city"
                                 name="city"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.city}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Flowbite"
@@ -189,7 +223,7 @@ const EventForm = () => {
                                 <input type="text" id="start_date"
 
                                     name="start_date"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.start_date}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -202,7 +236,7 @@ const EventForm = () => {
                                 </div>
                                 <input type="text" id="end_date"
                                     name="end_date"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.end_date}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -215,7 +249,7 @@ const EventForm = () => {
                                 </div>
                                 <input type="text" id="start_time"
                                     name="start_time"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.start_time}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -228,7 +262,7 @@ const EventForm = () => {
                                 </div>
                                 <input type="text" id="end_time"
                                     name="end_time"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.end_time}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -247,7 +281,7 @@ const EventForm = () => {
                             type="text"
                             id="venue_name"
                             name="venue_name"
-                            onChange={handleEventChange}
+                            onChange={handleChange}
                             value={formData.venue_name}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Nairobi"
@@ -266,7 +300,7 @@ const EventForm = () => {
                                 type="text"
                                 id="location2"
                                 name="location2"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.location2}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 w-full dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="John"
@@ -284,7 +318,7 @@ const EventForm = () => {
                                 type="text"
                                 id="meeting_link"
                                 name="meeting_link"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.meeting_link}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="John"
@@ -304,7 +338,7 @@ const EventForm = () => {
                                 </div>
                                 <input type="email" id="email"
                                     name="email"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.email}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -317,7 +351,7 @@ const EventForm = () => {
                                 </div>
                                 <input type="text" id="ticket_price"
                                     name="ticket_price"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.ticket_price}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
@@ -341,7 +375,7 @@ const EventForm = () => {
                                 type="text"
                                 id="abbreviation"
                                 name="abbreviation"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.abbreviation}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 w-full dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Mr"
@@ -354,7 +388,7 @@ const EventForm = () => {
                                 type="text"
                                 id="first_name"
                                 name="first_name"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.first_name}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="First Name"
@@ -367,7 +401,7 @@ const EventForm = () => {
                                 type="text"
                                 id="middle_name"
                                 name="middle_name"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.middle_name}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Middle Name (Optional)"
@@ -380,7 +414,7 @@ const EventForm = () => {
                                 type="text"
                                 id="last_name"
                                 name="last_name"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.last_name}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Last Name"
@@ -400,7 +434,7 @@ const EventForm = () => {
                                 </span>
                                 <input type="text" id="phone_number"
                                     name="phone_number"
-                                    onChange={handleEventChange}
+                                    onChange={handleChange}
                                     value={formData.phone_number}
                                     className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="254706271861" />
                             </div>
@@ -416,7 +450,7 @@ const EventForm = () => {
                                 type="url"
                                 id="website"
                                 name="website"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.website}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="flowbite.com"
@@ -439,7 +473,7 @@ const EventForm = () => {
                                 type="tel"
                                 id="facebook_link"
                                 name="facebook_link"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.facebook_link}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder=""
@@ -457,7 +491,7 @@ const EventForm = () => {
                                 type="tel"
                                 id="instagram_link"
                                 name="instagram_link"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.instagram_link}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder=""
@@ -477,7 +511,7 @@ const EventForm = () => {
                                 id="twitter_link"
 
                                 name="twitter_link"
-                                onChange={handleEventChange}
+                                onChange={handleChange}
                                 value={formData.twitter_link}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder=""
@@ -497,7 +531,7 @@ const EventForm = () => {
                             type="other_info"
                             id="other_info"
                             name="other_info"
-                            onChange={handleEventChange}
+                            onChange={handleChange}
                             value={formData.other_info}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder=""

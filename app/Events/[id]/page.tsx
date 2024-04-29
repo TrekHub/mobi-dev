@@ -24,10 +24,18 @@ const CreateEvent = async ({ params }: any) => {
     let updatedEventData = {};
 
     if (EDITMODE) {
-        updatedEventData = await getEventById(params.id);
-        console.log(updatedEventData);
+        const fetchedEvent = await getEventById(params.id);
+        updatedEventData = fetchedEvent.event;
+        console.log("uhello", updatedEventData);
+    } else {
+        updatedEventData = {
+            _id: "new"
+        }
     }
-    return <EventForm />;
+
+
+
+    return <EventForm event={updatedEventData} />;
 };
 
 export default CreateEvent;
