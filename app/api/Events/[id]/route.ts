@@ -28,3 +28,23 @@ export async function DELETE(req: NextRequest, { params }: any) {
     );
   }
 }
+
+export async function PUT(req: NextRequest, { params }: any) {
+  try {
+    const { id } = params;
+    const resBody = await req.json();
+    const eventData = resBody.formData;
+
+    const updatedEvent = await Event.findByIdAndUpdate(id, {
+      ...eventData,
+    });
+
+    return NextResponse.json({ message: "Event Updated" }, { status: 200 });
+  } catch (err) {
+    console.error("Error deleting event:", err);
+    return NextResponse.json(
+      { message: "An error occurred while deleting the event", err },
+      { status: 500 }
+    );
+  }
+}

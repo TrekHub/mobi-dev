@@ -83,25 +83,51 @@ const EventForm = ({ event }: any) => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        try {
-            const res = await fetch("/api/Events", {
-                method: "POST",
-                body: JSON.stringify({ formData }),
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-            if (res.ok) {
-                router.push("/");
-                router.refresh();
-            } else {
-                throw new Error("Something went wrong. Failed to create event.");
-            }
-            console.log("Form data:", formData);
 
-        } catch (error) {
-            console.error("Error occurred during form submission:", error);
+
+        if (EDITMODE) {
+            try {
+                const res = await fetch(`/api/Events/${event._id}`, {
+                    method: "PUT",
+                    body: JSON.stringify({ formData }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
+                if (res.ok) {
+                    router.push("/");
+                    router.refresh();
+                } else {
+                    throw new Error("Something went wrong. Failed to update event.");
+                }
+                console.log("Form data:", formData);
+    
+            } catch (error) {
+                console.error("Error occurred during form submission:", error);
+            }
+         } else { 
+            try {
+                const res = await fetch("/api/Events", {
+                    method: "POST",
+                    body: JSON.stringify({ formData }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
+                if (res.ok) {
+                    router.push("/");
+                    router.refresh();
+                } else {
+                    throw new Error("Something went wrong. Failed to create event.");
+                }
+                console.log("Form data:", formData);
+    
+            } catch (error) {
+                console.error("Error occurred during form submission:", error);
+            }
         }
+
+       
     };
 
 
@@ -111,7 +137,11 @@ const EventForm = ({ event }: any) => {
     return (
         <div className="flex flex-col">
             <Banner />
+
+
             <div className="w-2/5  mx-auto mt-10">
+
+                <h2 className="mb-3 font-bold text-lg">{EDITMODE ? "Update Event" : "Create Event"}</h2>
                 <form method="post" onSubmit={handleSubmit}>
                     <div className="mb-6">
                         <label
@@ -554,7 +584,7 @@ const EventForm = ({ event }: any) => {
                             onClick={handleSubmit}
                             className="text-white bg-green-accent hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >
-                            Publish
+                            {EDITMODE ? "Update" : "Publish"}
                         </button>
                     </div>
 
