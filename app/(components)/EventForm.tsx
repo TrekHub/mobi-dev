@@ -28,7 +28,6 @@ const EventForm = () => {
                     "Content-Type": "application/json",
                 }
             });
-
             if (res.ok) {
                 router.push("/");
                 router.refresh();
@@ -72,10 +71,6 @@ const EventForm = () => {
         other_info: "",
     }
     const [formData, setFormData] = useState(initialState);
-
-
-
-
 
     return (
         <div className="flex flex-col">

@@ -1,10 +1,10 @@
-"use client";
+// "use client";
 
-import EventForm from "@/app/(components)/EventForm";
-import React from "react";
+// import EventForm from "@/app/(components)/EventForm";
+// import React from "react";
 
-const CreateEvent = () => {
-    return <EventForm />;
-};
+// const CreateEvent = () => {
+//     return <EventForm />;
+// };
 
-export default CreateEvent;
+// export default CreateEvent;

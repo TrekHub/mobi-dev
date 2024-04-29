@@ -2,8 +2,25 @@ import Image from "next/image";
 import HeroSection from "./(components)/HeroSection";
 import Banner from "./(components)/Banner";
 import EventCard from "./(components)/EventCard";
+//fetching events
+const getEvents = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/Events", {
+      cache: "no-cache",
+    });
+    const data = await res.json();
+    console.log("Events:", data);
+    return data;
+  } catch (err) {
+    console.error("Error fetching events:", err);
+    return { error: "An error occurred while fetching events" };
+  }
+}
 
-export default function Home() {
+const Home = async () => {
+  const  events  = await getEvents();
+  console.log(events);
+
   return (
     <div>
       <div>
@@ -13,13 +30,13 @@ export default function Home() {
         <HeroSection />
       </div>
       <div className="w-3/4 mx-auto mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
+        {events && events.map((event: any) => ( // Check if events exist
+          <EventCard key={event._id} event={event} />
+        ))}
 
       </div>
     </div>
   );
 }
+
+export default Home;
