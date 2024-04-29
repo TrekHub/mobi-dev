@@ -4,7 +4,7 @@ import React from "react";
 
 const getEventById = async (id: any) => {
     try {
-        const res = await fetch(`${process.env.BASE_URL}/api/Events/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/Events/${id}`, {
             cache: "no-cache",
         });
         if (!res.ok) {

@@ -10,7 +10,7 @@ import React from 'react'
 
 const getEventById = async (id: any) => {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/api/Events/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/Events/${id}`, {
       cache: "no-cache",
     });
     if (!res.ok) {
@@ -29,11 +29,11 @@ const PreviewEvent = async ({ params }: any) => {
 
   function formatDateToCustomFormat(date: Date): string {
     return date.toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
     });
-}
+  }
   const fetchedEvent = await getEventById(params.id);
   const event = fetchedEvent.event;
   console.log(event);

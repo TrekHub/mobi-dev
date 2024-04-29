@@ -104,7 +104,7 @@ const EventForm = ({ event }: any) => {
             }
         } else {
             try {
-                const res = await fetch("/api/Events", {
+                const res = await fetch(`/api/Events`, {
                     method: "POST",
                     body: JSON.stringify({ formData }),
                     headers: {
