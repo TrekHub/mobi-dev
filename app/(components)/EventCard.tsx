@@ -6,6 +6,37 @@ import Link from "next/link";
 import React from "react";
 
 const EventCard = ({ event }: any) => {
+
+
+  function formatDateDay(date: Date): string {
+    return date.toLocaleString('en-US', {
+      day: 'numeric',
+      month: "long"
+
+
+    });
+  }
+
+  function getDayOfMonth(date: any): string {
+
+    const formatted = new Date(date);
+    const dayOfMonth = formatted.getDate();
+    return dayOfMonth.toString();
+  }
+
+  function getMonthInWords(date: any): string {
+    const formatted = new Date(date);
+    const monthNames = [
+      "Jan", "Feb", "Mar",
+      "Apr", "May", "Jun", "Jul",
+      "Aug", "Sep", "Oct",
+      "Nov", "Dec"
+    ];
+    const monthIndex = formatted.getMonth();
+    return monthNames[monthIndex];
+  }
+
+
   return (
 
 
@@ -22,12 +53,12 @@ const EventCard = ({ event }: any) => {
           <div className="w-1/3">
 
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-purple-accent dark:text-white">
-              Nov
+            {getMonthInWords(event.start_date)}
             </h5>
 
 
             <h5 className="text-2xl font-bold  text-gray-900 dark:text-white">
-              24 - 26
+              {getDayOfMonth(event.start_date)} - {getDayOfMonth(event.end_date)}
             </h5>
 
           </div>
@@ -42,7 +73,7 @@ const EventCard = ({ event }: any) => {
               {event.location}
             </p>
             <p className="mb-3 font-normal  md:text-sm text-gray-700 dark:text-gray-400">
-              {event.start_date} - {event.end_date}
+              {event.start_time} - {event.end_time}
             </p>
 
             <div className="flex flex-row">
@@ -52,7 +83,7 @@ const EventCard = ({ event }: any) => {
               </span>
               <span className="flex flex-row ml-3  md:text-sm">
                 <FontAwesomeIcon icon={faStar} className="w-5 h-5 mr-1   text-purple-accent" />
-                14 
+                14
               </span>
 
             </div>

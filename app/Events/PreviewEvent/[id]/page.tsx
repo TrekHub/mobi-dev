@@ -26,6 +26,14 @@ const getEventById = async (id: any) => {
 
 const PreviewEvent = async ({ params }: any) => {
 
+
+  function formatDateToCustomFormat(date: Date): string {
+    return date.toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+}
   const fetchedEvent = await getEventById(params.id);
   const event = fetchedEvent.event;
   console.log(event);
@@ -46,11 +54,11 @@ const PreviewEvent = async ({ params }: any) => {
           <p className="mt-3  text-xl font-semibold">Date and Time</p>
 
           <span className="inline-flex items-center mt-5 text-sm text-gray-900  rounded-s-md">
-            <FontAwesomeIcon icon={faCalendar} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium">Saturday, 2 December 2023</span>
+            <FontAwesomeIcon icon={faCalendar} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium">{formatDateToCustomFormat(event.start_date)}</span>
           </span>
 
           <span className="inline-flex items-center mt-2 text-sm text-gray-900  rounded-s-md">
-            <FontAwesomeIcon icon={faClock} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium">6:30 PM - 9:30 PM</span>
+            <FontAwesomeIcon icon={faClock} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium"> {event.start_time} - {event.end_time} </span>
           </span>
           <span className="ml-3 mt-2 text-lg text-green-accent font-medium">+ Add to Calender</span>
         </div>
@@ -67,7 +75,7 @@ const PreviewEvent = async ({ params }: any) => {
           </button>
           <p className="mt-3  text-xl font-semibold">Ticket Information</p>
           <span className="inline-flex items-center mt-2 text-sm text-gray-900  rounded-s-md">
-            <FontAwesomeIcon icon={faTicket} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium"> Ksh. {event.event_price} each</span>
+            <FontAwesomeIcon icon={faTicket} className="w-4 h-4 " /> <span className="ml-3 text-lg text-gray-600 font-medium"> Ksh. {event.ticket_price} each</span>
           </span>
 
         </div>

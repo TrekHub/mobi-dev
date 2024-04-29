@@ -8,64 +8,39 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock, faEnvelope, faFlag, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 
+
 const EventForm = ({ event }: any) => {
     const EDITMODE = event._id === "new" ? false : true;
     const router = useRouter();
 
 
     const initialState = {
-        event_name: "",
-        event_description: "",
-        // banner_img: "",
-        location: "",
-        country: "",
-        city: "",
-        start_date: "",
-        end_date: "",
-        start_time: "",
-        end_time: "",
-        venue_name: "",
-        location2: "",
-        meeting_link: "",
-        email: "",
-        ticket_price: "",
-        abbreviation: "",
-        first_name: "",
-        middle_name: "",
-        last_name: "",
-        phone_number: "",
-        website: "",
-        facebook_link: "",
-        instagram_link: "",
-        twitter_link: "",
-        other_info: "",
+        event_name: event.event_name || "",
+        event_description: event.event_description || "",
+        location: event.location || "",
+        country: event.country || "",
+        city: event.city || "",
+        start_date: event.start_date || "",
+        end_date: event.end_date || "",
+        start_time: event.start_time || "",
+        end_time: event.end_time || "",
+        venue_name: event.venue_name || "",
+        location2: event.location2 || "",
+        meeting_link: event.meeting_link || "",
+        email: event.email || "",
+        ticket_price: event.ticket_price || "",
+        abbreviation: event.abbreviation || "",
+        first_name: event.first_name || "",
+        middle_name: event.middle_name || "",
+        last_name: event.last_name || "",
+        phone_number: event.phone_number || "",
+        website: event.website || "",
+        facebook_link: event.facebook_link || "",
+        instagram_link: event.instagram_link || "",
+        twitter_link: event.twitter_link || "",
+        other_info: event.other_info || "",
     }
-    if (EDITMODE) {
-        initialState["event_name"] = event.event_name;
-        initialState["event_description"] = event.event_description;
-        initialState["location"] = event.location;
-        initialState["country"] = event.country;
-        initialState["city"] = event.city;
-        initialState["start_date"] = event.start_date;
-        initialState["end_date"] = event.end_date;
-        initialState["start_time"] = event.start_time;
-        initialState["end_time"] = event.end_time;
-        initialState["venue_name"] = event.venue_name;
-        initialState["location2"] = event.location2;
-        initialState["meeting_link"] = event.meeting_link;
-        initialState["email"] = event.email;
-        initialState["ticket_price"] = event.ticket_price;
-        initialState["abbreviation"] = event.abbreviation;
-        initialState["first_name"] = event.first_name;
-        initialState["middle_name"] = event.middle_name;
-        initialState["last_name"] = event.last_name;
-        initialState["phone_number"] = event.phone_number;
-        initialState["website"] = event.website;
-        initialState["facebook_link"] = event.facebook_link;
-        initialState["instagram_link"] = event.instagram_link;
-        initialState["twitter_link"] = event.twitter_link;
-        initialState["other_info"] = event.other_info;
-    }
+
 
 
 
@@ -101,11 +76,11 @@ const EventForm = ({ event }: any) => {
                     throw new Error("Something went wrong. Failed to update event.");
                 }
                 console.log("Form data:", formData);
-    
+
             } catch (error) {
                 console.error("Error occurred during form submission:", error);
             }
-         } else { 
+        } else {
             try {
                 const res = await fetch("/api/Events", {
                     method: "POST",
@@ -121,13 +96,11 @@ const EventForm = ({ event }: any) => {
                     throw new Error("Something went wrong. Failed to create event.");
                 }
                 console.log("Form data:", formData);
-    
+
             } catch (error) {
                 console.error("Error occurred during form submission:", error);
             }
         }
-
-       
     };
 
 
@@ -137,9 +110,7 @@ const EventForm = ({ event }: any) => {
     return (
         <div className="flex flex-col">
             <Banner />
-
-
-            <div className="w-2/5  mx-auto mt-10">
+            <div className="w-2/5 md:w-4/5  mx-auto mt-10">
 
                 <h2 className="mb-3 font-bold text-lg">{EDITMODE ? "Update Event" : "Create Event"}</h2>
                 <form method="post" onSubmit={handleSubmit}>
@@ -248,9 +219,9 @@ const EventForm = ({ event }: any) => {
                             <label htmlFor="start_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
                             <div className="relative mb-6">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <FontAwesomeIcon icon={faCalendar} className="text-gray-500 h-4 w-4" />
+                                    {/* <FontAwesomeIcon icon={faCalendar} className="text-gray-500 h-4 w-4" /> */}
                                 </div>
-                                <input type="text" id="start_date"
+                                <input type="date" id="start_date"
 
                                     name="start_date"
                                     onChange={handleChange}
@@ -262,9 +233,9 @@ const EventForm = ({ event }: any) => {
                             <label htmlFor="end_date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End Date</label>
                             <div className="relative mb-6">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <FontAwesomeIcon icon={faCalendar} className="text-gray-500 h-4 w-4" />
+                                    {/* <FontAwesomeIcon icon={faCalendar} className="text-gray-500 h-4 w-4" /> */}
                                 </div>
-                                <input type="text" id="end_date"
+                                <input type="date" id="end_date"
                                     name="end_date"
                                     onChange={handleChange}
                                     value={formData.end_date}
@@ -275,9 +246,9 @@ const EventForm = ({ event }: any) => {
                             <label htmlFor="start_time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Time</label>
                             <div className="relative mb-6">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <FontAwesomeIcon icon={faClock} className="text-gray-500 h-4 w-4" />
+                                    {/* <FontAwesomeIcon icon={faClock} className="text-gray-500 h-4 w-4" /> */}
                                 </div>
-                                <input type="text" id="start_time"
+                                <input type="time" id="start_time"
                                     name="start_time"
                                     onChange={handleChange}
                                     value={formData.start_time}
@@ -288,15 +259,16 @@ const EventForm = ({ event }: any) => {
                             <label htmlFor="end_time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End Time</label>
                             <div className="relative mb-6">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                    <FontAwesomeIcon icon={faClock} className="text-gray-500 h-4 w-4" />
+                                    {/* <FontAwesomeIcon icon={faClock} className="text-gray-500 h-4 w-4" /> */}
                                 </div>
-                                <input type="text" id="end_time"
+                                <input type="time" id="end_time"
                                     name="end_time"
                                     onChange={handleChange}
                                     value={formData.end_time}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
                         </div>
+                        
 
                     </div>
 
