@@ -6,6 +6,7 @@ import PreviewEvent from "./[id]/page";
 
 const getEventById = async (id: any) => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+    console.log("baseUrl", baseUrl);
 
     try {
         const res = await fetch(`${baseUrl}/api/Events/${id}`, {
