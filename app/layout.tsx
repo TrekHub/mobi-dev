@@ -2,10 +2,10 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
-import NavBar from "./(components)/Nav";
+import NavBar from "./components/Nav";
 import "flowbite";
-import Banner from "./(components)/Banner";
-import HeroSection from "./(components)/HeroSection";
+import Banner from "./components/Banner";
+import HeroSection from "./components/HeroSection";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 

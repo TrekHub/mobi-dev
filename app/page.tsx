@@ -1,9 +1,9 @@
 
 
 import Image from "next/image";
-import HeroSection from "./(components)/HeroSection";
-import Banner from "./(components)/Banner";
-import EventCard from "./(components)/EventCard";
+import HeroSection from "./components/HeroSection";
+import Banner from "./components/Banner";
+import EventCard from "./components/EventCard";
 // import { useEffect, useState } from "react";
 import { BASE_API_URL } from "./constants";
 //fetching events
@@ -35,7 +35,7 @@ const getEvents = async () => {
 }
 
 const Home = async () => {
-  if (!BASE_API_URL) {
+  if (BASE_API_URL === undefined) {
     return null;
   }
   const events = await getEvents();

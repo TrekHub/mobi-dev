@@ -1,4 +1,4 @@
-import EventForm from "@/app/(components)/EventForm";
+import EventForm from "@/app/components/EventForm";
 import React from "react";
 
 
