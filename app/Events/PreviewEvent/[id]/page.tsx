@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { BASE_API_URL } from '@/app/constants'
 import { faAdd, faCalendar, faClock, faFlag, faLocation, faTicket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -12,11 +13,10 @@ import React from 'react'
 
 const getEventById = async (id: any) => {
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
-
-  if (!baseUrl) {
-    return;
+  if (!BASE_API_URL) {
+    throw new Error("Base URL is not configured.");
   }
+  const baseUrl = BASE_API_URL;
   try {
     const res = await fetch(`${baseUrl}/api/Events/${id}`, {
       cache: "no-cache",

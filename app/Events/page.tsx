@@ -1,13 +1,14 @@
 import EventForm from "@/app/components/EventForm";
 import React from "react";
+import { BASE_API_URL } from "../constants";
 
 
 
 const getEventById = async (id: any) => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    if (!baseUrl) {
-        return;
-    }
+    if (!BASE_API_URL) {
+        throw new Error("Base URL is not configured.");
+      }
+      const baseUrl = BASE_API_URL;
 
     try {
         const res = await fetch(`${baseUrl}/api/Events/${id}`, {

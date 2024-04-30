@@ -18,23 +18,25 @@ interface Event {
 }
 
 const Home = () => {
+  if (!BASE_API_URL) {
+    throw new Error("Base URL is not configured.");
+  }
+  const baseUrl = BASE_API_URL;
   // Initialize states with appropriate types and default values
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const baseUrl = BASE_API_URL;
 
 
-  if (!baseUrl) {
-    throw new Error("Base URL is not configured.");
-  }
+
+
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
 
         console.log("baseUrl", baseUrl);
-        // Using `fetch` API with `await` for asynchronous data fetching
+
         const res = await fetch(`${baseUrl}/api/Events`, {
           cache: "no-cache",
         });
@@ -56,8 +58,6 @@ const Home = () => {
 
     fetchEvents();
   }, []);
-
-  // Separate conditional rendering for loading and error states
   if (loading) {
     return <div>Loading...</div>;
   }
