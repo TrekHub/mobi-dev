@@ -8,14 +8,16 @@ import EventCard from "./(components)/EventCard";
 import { BASE_API_URL } from "./constants";
 //fetching events
 const getEvents = async () => {
-
+  if (!BASE_API_URL) {
+    return null;
+  }
 
   const baseUrl = BASE_API_URL;
   console.log("Base URL:", baseUrl);
   // make sure to add the base url in the .env file
-  if (baseUrl == undefined) {
-    return { error: "Base URL not found" };
-  }
+  // if (baseUrl == undefined) {
+  //   return { error: "Base URL not found" };
+  // }
   try {
 
     const res = await fetch(`${baseUrl}/api/Events`, {
@@ -33,9 +35,9 @@ const getEvents = async () => {
 }
 
 const Home = async () => {
-  // if (process.env.NEXT_PUBLIC_BASE_API_URL == undefined) {
-  //   return null;
-  // }
+  if (!BASE_API_URL) {
+    return null;
+  }
   const events = await getEvents();
   // console.log(events);
 
