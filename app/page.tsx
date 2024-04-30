@@ -1,4 +1,4 @@
-"use client";
+"use cl"
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -31,7 +31,7 @@ const Home = () => {
         setEvents(data);
         setLoading(false);
       } catch (err) {
-        console.error("An error occurred while fetching events:", err);
+        // console.error("An error occurred while fetching events:", err);
         setError(null);
         setLoading(false);
       }
