@@ -9,6 +9,7 @@ const getEvents = async () => {
 
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+  console.log("Base URL:", baseUrl);
 
   // make sure to add the base url in the .env file
   if (baseUrl == undefined) {
