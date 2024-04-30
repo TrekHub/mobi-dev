@@ -22,6 +22,8 @@ const Home = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const baseUrl = BASE_API_URL;
+
 
   if (!baseUrl) {
     throw new Error("Base URL is not configured.");
@@ -30,7 +32,6 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const baseUrl = BASE_API_URL;
 
         console.log("baseUrl", baseUrl);
         // Using `fetch` API with `await` for asynchronous data fetching
