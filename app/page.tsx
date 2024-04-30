@@ -4,13 +4,14 @@ import Image from "next/image";
 import HeroSection from "./(components)/HeroSection";
 import Banner from "./(components)/Banner";
 import EventCard from "./(components)/EventCard";
+// import { useEffect, useState } from "react";
+import { BASE_API_URL } from "./constants";
 //fetching events
 const getEvents = async () => {
 
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const baseUrl = BASE_API_URL;
   console.log("Base URL:", baseUrl);
-
   // make sure to add the base url in the .env file
   if (baseUrl == undefined) {
     return { error: "Base URL not found" };
