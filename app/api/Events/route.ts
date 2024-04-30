@@ -1,4 +1,4 @@
-import Event from "../../(models)/Event";
+import Event from "../../models/Event";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -25,5 +25,5 @@ export async function GET(req: NextRequest) {
       { message: "An error occurred while fetching events", err },
       { status: 500 }
     );
-  } 
+  }
 }

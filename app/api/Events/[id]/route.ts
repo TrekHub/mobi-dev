@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Event from "@/app/(models)/Event";
+import Event from "@/app/models/Event";
 
 export async function GET(req: NextRequest, { params }: any) {
   try {
