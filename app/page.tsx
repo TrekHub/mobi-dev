@@ -1,4 +1,7 @@
 // Use `import` instead of `require` for better static analysis and TypeScript support
+
+
+"use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import HeroSection from "./components/HeroSection";
@@ -10,6 +13,8 @@ import { BASE_API_URL } from "./constants";
 interface Event {
   _id: string;
   // Define other properties as per your event structure
+
+
 }
 
 const Home = () => {
@@ -25,7 +30,7 @@ const Home = () => {
         if (!baseUrl) {
           throw new Error("Base URL is not configured.");
         }
-
+console.log("baseUrl", baseUrl);
         // Using `fetch` API with `await` for asynchronous data fetching
         const res = await fetch(`${baseUrl}/api/Events`, {
           cache: "no-cache",
